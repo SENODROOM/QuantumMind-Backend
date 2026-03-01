@@ -1,5 +1,5 @@
 {
-  "name": "anonymousthinker-backend",
+  "name": "quantummind-backend",
   "version": "1.0.0",
   "description": "AnonymousThinker AI Chat Backend",
   "main": "server.js",

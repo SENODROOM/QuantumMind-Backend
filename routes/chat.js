@@ -142,10 +142,10 @@ router.post('/conversations/:id/message', auth, async (req, res) => {
     });
 
     const systemPromptText = activePrompt?.prompt ||
-      `You are AnonymousThinker, a helpful, thoughtful, and intelligent AI assistant. 
-       You provide clear, accurate, and engaging responses. You think deeply about questions 
-       and provide nuanced answers. Be concise but thorough. If you don't know something, 
-       say so honestly.`;
+      `You are QuantumMind, a highly advanced AI coding and reasoning assistant. 
+       You specialize in software architecture, debugging complex systems, and providing efficient, 
+       scalable solutions. You think analytically and prioritize clean code and logical consistency. 
+       Be concise but thorough. If you don't know something, say so honestly.`;
 
     // Prepare messages for AI (last 20 messages for context)
     const recentMessages = conversation.messages
@@ -168,20 +168,19 @@ router.post('/conversations/:id/message', auth, async (req, res) => {
     let comparisonResponse = null;
 
     try {
-      // 0. Perform RAG (Retrieval Augmented Generation) - GLOBAL ADMIN KNOWLEDGE
-      // Search Knowledge Base for relevant snippets from any ADMIN account
+      // 0. Perform RAG (Retrieval Augmented Generation) - GLOBAL TECHNICAL KNOWLEDGE
       let knowledgeContext = "";
       try {
         const relevantDocs = await Knowledge.find(
-          { $text: { $search: content } }, // Search all knowledge (since only admins can upload now)
+          { $text: { $search: content } },
           { score: { $meta: "textScore" } }
         )
           .sort({ score: { $meta: "textScore" } })
-          .limit(5); // Increased limit for better coverage
+          .limit(5);
 
         if (relevantDocs.length > 0) {
           knowledgeContext = relevantDocs.map(doc => `[Source: ${doc.fileName}]: ${doc.content}`).join("\n\n");
-          console.log(`🧠 Global RAG: Found ${relevantDocs.length} snippets`);
+          console.log(`🧠 Technical RAG: Found ${relevantDocs.length} snippets`);
         }
       } catch (ragError) {
         console.error("RAG Search failed:", ragError.message);
@@ -189,19 +188,19 @@ router.post('/conversations/:id/message', auth, async (req, res) => {
 
       // Fetch Global Admin Persona/Prompt
       const adminPersona = await SystemPrompt.findOne({ isActive: true }).sort({ createdAt: -1 });
-      const baseSystemPrompt = adminPersona ? adminPersona.prompt : "You are AnonymousThinker, a helpful and intellectually honest AI assistant.";
+      const baseSystemPrompt = adminPersona ? adminPersona.prompt : "You are QuantumMind, a helpful and technologically advanced AI assistant.";
 
-      // Refine System Prompt with Specialized Islamic Grounding
+      // Refine System Prompt with Specialized Technical Grounding
       const groundingHeader = `
 ### MISSION & WORLDVIEW
-You are an intellectual defender of Islam. Your goal is to provide a safe space for users to share their thoughts while maintaining a clear, logical, and firm stance on the truth of Islam.
+You are QuantumMind, a premier technical reasoning engine. Your goal is to assist users with complex coding tasks, system architecture, and real-world problem-solving.
 
-1. **Patient & Logical**: Be patient and use intellectual rigor. Do not use aggression.
-2. **Priority of Islam**: If atheistic thoughts or other religions are mentioned, use logic and provided knowledge to respectfully show why they are incorrect or incomplete when compared to the truth of Islam.
-3. **Evidence-Based**: Use the contextual knowledge below as your primary source of truth.
+1. **Analytical & Precise**: Use technical rigor and precise language.
+2. **Problem Solver**: If a technical challenge or bug is presented, use logic and provided knowledge to architect the most robust solution.
+3. **Evidence-Based**: Use the technical contextual knowledge below as your primary source of technical truth.
 
-### CONTEXTUAL KNOWLEDGE (GLOBAL DATABASE)
-${knowledgeContext || "No specific document snippets found. Use general Islamic logic and sound reasoning to prove Islamic truth."}
+### CONTEXTUAL KNOWLEDGE (TECHNICAL DATABASE)
+${knowledgeContext || "No specific technical snippets found. Use general software engineering principles and logical reasoning."}
       `;
 
       const finalSystemPrompt = `${groundingHeader}\n\n${baseSystemPrompt}`;

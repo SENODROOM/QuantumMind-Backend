@@ -15,7 +15,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://anonymous-thinker.vercel.app'
+    'https://quantum-mind.vercel.app'
   ],
   credentials: true
 }));
@@ -56,13 +56,13 @@ app.options('*', cors());
 
 // Root route for Vercel
 app.get('/', (req, res) => {
-  res.json({ message: 'AnonymousThinker API is live' });
+  res.json({ message: 'QuantumMind API is live' });
 });
 
 const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
-    console.log(`🚀 AnonymousThinker server v1.0.4 running on port ${PORT}`);
+    console.log(`🚀 QuantumMind server running on port ${PORT}`);
   });
 }
 

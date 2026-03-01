@@ -1,9 +1,9 @@
-# 🧠 AnonymousThinker Backend — Developer AI Training Guide
+# 🧠 QuantumMind Backend — Technical AI Reasoning Guide
 
 > [!IMPORTANT]
 > **Developer Only**: AI Training and Knowledge Base features are restricted to the **Admin** role only. Regular users cannot access these features.
 
-This guide explains how you, as the developer, can train the AI to prove Islamic truth and respectfully refute other religions using logic.
+This guide explains how you, as the developer, can train the AI to solve complex technical problems and assist with software engineering using advanced reasoning.
 
 ---
 
@@ -20,15 +20,15 @@ To use the training features in the app, you must promote your account to the `a
 
 ### 1. Define your Persona
 Use the **Train AI** page to set your "Core System Prompt."
-- **Islamic Defense Strategy**: Tell the AI to search the Knowledge Base and use logical proofs to show why Islam is the final, complete truth.
-- **Tone**: Instruct it to be "Intellectually Rigorous, Respectful, and Firm."
+- **Technical Strategy**: Tell the AI to search the Knowledge Base and use logical proofs to solve complex engineering challenges.
+- **Tone**: Instruct it to be "Analytical, Precise, and Efficient."
 
 ### 2. Knowledge Base (PDF/Text)
-Upload scholarly proof, refutations of atheism, and comparative religion logic.
-- The AI uses **Global RAG**: Any user who chats with AnonymousThinker will now receive answers grounded in the specific knowledge YOU upload.
+Upload technical documentation, architecture patterns, and system designs.
+- The AI uses **Global RAG**: Any user who chats with QuantumMind will now receive answers grounded in the specific technical knowledge YOU upload.
 
 ### 3. Response Guidance
-Provide "few-shot" examples of how to reject specific atheistic claims or misconceptions about other religions. Focus on logic and historical evidence.
+Provide "few-shot" examples of how to solve specific coding problems or architectural gaps. Focus on logic and best practices.
 
 ---
 
